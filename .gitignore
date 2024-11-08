@@ -1,0 +1,10 @@
+# Ignore the following files:
+test.csv
+
+# Ignore the following folders:
+envCozieViz
+
+# Ignore the following file types:
+**.pyc
+**log.txt
+
