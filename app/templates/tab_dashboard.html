@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h2>Dashboard</h2>
+{% if session['columns'] %}
+    <h4>Column Names:</h4>
+    <ul>
+        {% for column in session['columns'] %}
+        <li>{{ column }}</li>
+        {% endfor %}
+    </ul>
+{% else %}
+    <p>No data available. Please upload a CSV file first.</p>
+{% endif %}
+{% endblock %}
