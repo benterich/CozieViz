@@ -1,0 +1,30 @@
+.header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: white;
+    padding: 10px 20px;
+    border-bottom: 1px solid #DDDDDD;
+    color: #2C3E50;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+}
+
+.logo img {
+    height: 33px;
+    margin-right: 10px;
+}
+
+.footer {
+    text-align: center;
+    padding: 10px;
+    background-color: white;
+    border-top: 1px solid #DDDDDD;
+    color: #2C3E50;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}

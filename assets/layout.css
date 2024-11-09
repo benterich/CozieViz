@@ -1,0 +1,53 @@
+body {
+    font-family: 'Doto', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #F8F9FA;
+}
+
+.header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: white;
+    padding: 10px 20px;
+    border-bottom: 1px solid #DDDDDD;
+    color: #2C3E50;
+}
+
+.logo img {
+    height: 33px;
+    margin-right: 10px;
+}
+
+.header-title {
+    font-size: 8px;
+    margin: 0;
+}
+
+.nav-tabs {
+    display: flex;
+    justify-content: left;
+    padding: 6px;
+    gap: 20px;
+    background-color: white;
+    border-bottom: 1px solid #DDDDDD;
+}
+
+h1 {
+    font-size: 24px;
+    color: #2C3E50;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    font-weight: bold;
+}
+
+
+h2 {
+    font-size: 14px;
+    color: #2C3E50;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    font-weight: bold;
+}
+
