@@ -1,13 +1,14 @@
+version: '3.8'
+
 services:
   web:
     build: .
     ports:
-      - "5000:5000"
+      - "8050:8050"
     volumes:
-      - ./app:/app
+      - .:/app
     environment:
-      - FLASK_ENV=development
-      - PYTHONPATH=/app
+      - PYTHONPATH=.
     depends_on:
       - db
   db:
@@ -18,7 +19,6 @@ services:
       POSTGRES_DB: cozie_db
     volumes:
       - db_data:/var/lib/postgresql/data
-    restart: always
 
 volumes:
   db_data:
