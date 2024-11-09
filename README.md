@@ -150,7 +150,7 @@ Credits to those who have contributed to the tool or resources (e.g. libraries) 
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-Also a lot of inspiration is drawn from the [https://github.com/CenterForTheBuiltEnvironment](CenterForTheBuiltEnvironment) and its [https://github.com/CenterForTheBuiltEnvironment/clima](CBE Clima Tool Repository), created by:
+Also a lot of inspiration is drawn from the [Center for the Built Environment](https://github.com/CenterForTheBuiltEnvironment) and its [CBE Clima Tool Repository](https://github.com/CenterForTheBuiltEnvironment/clima), created by:
 * [Giovanni Betti](https://www.linkedin.com/in/gbetti/)
 * [Federico Tartarini](https://www.linkedin.com/in/federico-tartarini-3991995b/)
 * [Christine Nguyen](https://chrlng.github.io/)
