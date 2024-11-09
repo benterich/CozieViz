@@ -15,14 +15,45 @@ body {
     color: #2C3E50;
 }
 
+.logo {
+    display: flex;
+    align-items: center;
+}
+
 .logo img {
     height: 33px;
     margin-right: 10px;
 }
 
+
 .header-title {
-    font-size: 8px;
+    font-size: 24px;
+    color: #2C3E50;
     margin: 0;
+}
+
+.documentation-links {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.doc-link {
+    text-decoration: none;
+    color: #2C3E50;
+    display: flex;
+    align-items: center;
+    font-size: 12px;
+    gap: 0px;
+}
+.doc-link:hover {
+    color: #ff602e;
+}
+
+.share-icon {
+    height: 12px; 
+    width: 12px;
+    margin-left: 5px;
 }
 
 .nav-tabs {
@@ -34,6 +65,7 @@ body {
     border-bottom: 1px solid #DDDDDD;
 }
 
+
 h1 {
     font-size: 24px;
     color: #2C3E50;
@@ -42,12 +74,10 @@ h1 {
     font-weight: bold;
 }
 
-
 h2 {
-    font-size: 14px;
+    font-size: 16px; 
     color: #2C3E50;
     margin-top: 10px;
     margin-bottom: 10px;
     font-weight: bold;
 }
-
