@@ -4,14 +4,12 @@ import os
 import pandas as pd
 import io
 import base64
+from my_project.routes import render_page_content, register_callbacks
 
 app = Dash(__name__, external_stylesheets=[dbc.themes.BOOTSTRAP], suppress_callback_exceptions=True)
 app.title = "CozieViz"
 
-
-uploaded_df = None
-
-
+# Function to render the header
 def render_header():
     return html.Div(
         className='header',
@@ -27,28 +25,19 @@ def render_header():
                 className='documentation-links',
                 children=[
                     html.A(
-                        children=[
-                            "Cozie",
-                            html.Img(src='/assets/icons/share.png', alt='Share Icon', className='share-icon')
-                        ],
+                        children=["Cozie", html.Img(src='/assets/icons/share.png', className='share-icon')],
                         href='https://cozie-apple.app/',
                         target='_blank',
                         className='doc-link'
                     ),
                     html.A(
-                        children=[
-                            "Cozie GitHub",
-                            html.Img(src='/assets/icons/share.png', alt='Share Icon', className='share-icon')
-                        ],
+                        children=["Cozie GitHub", html.Img(src='/assets/icons/share.png', className='share-icon')],
                         href='https://github.com/cozie-app/cozie-apple',
                         target='_blank',
                         className='doc-link'
                     ),
                     html.A(
-                        children=[
-                            "Cozie Research",
-                            html.Img(src='/assets/icons/share.png', alt='Share Icon', className='share-icon')
-                        ],
+                        children=["Cozie Research", html.Img(src='/assets/icons/share.png', className='share-icon')],
                         href='https://cozie.app/docs/cozie/intro-cozie/',
                         target='_blank',
                         className='doc-link'
@@ -58,12 +47,7 @@ def render_header():
         ]
     )
 
-def render_footer():
-    return html.Div(
-        className='footer',
-        children=["© 2024 CozieViz"]
-    )
-
+# Function to render the tabs
 def render_tabs(pathname):
     return html.Div(
         className='nav-tabs',
@@ -74,97 +58,40 @@ def render_tabs(pathname):
         ]
     )
 
-def render_home():
-    return html.Div(className='container', children=[
-        html.H2("Welcome to CozieViz Dashboard"),
-        html.P("This tool helps you upload CSV files and visualize the data.")
-    ])
+# Function to render the footer
+def render_footer():
+    return html.Div(
+        className='footer',
+        children=["© 2024 CozieViz"]
+    )
 
-def render_upload():
-    return html.Div(className='container', children=[
-        html.H2("Upload a CSV File"),
-        dcc.Upload(
-            id='upload-data',
-            children=html.Button('Upload CSV', className='btn btn-primary'),
-            multiple=False
-        ),
-        html.Div(id='upload-message', style={'margin-top': '20px'})
-    ])
-
-def render_dashboard():
-    return html.Div(className='container', children=[
-        html.H2("Dashboard"),
-        html.P("Data visualization and analysis.")
-    ])
-
-app.layout = html.Div([
-    dcc.Location(id='url', refresh=False),
-    render_header(),
-    html.Div(id='nav-tabs'),
-    html.Div(id='page-content'),
-    render_footer()
-])
-
+# Callback to update the tabs based on the current URL path
 @app.callback(
-    Output('nav-tabs', 'children'),
+    Output('nav-tabs', 'children'), 
     Input('url', 'pathname')
 )
 def update_tabs(pathname):
     return render_tabs(pathname)
 
+
+# Callback to render the page content based on the current URL path
 @app.callback(
     Output('page-content', 'children'),
     Input('url', 'pathname')
 )
 def display_page(pathname):
-    if pathname == '/upload':
-        return render_upload()
-    elif pathname == '/dashboard':
-        return render_dashboard()
-    else:
-        return render_home()
+    return render_page_content(pathname)
 
-@app.callback(
-    Output('upload-message', 'children'),
-    [Input('upload-data', 'contents')],
-    [State('upload-data', 'filename')]
-)
-def handle_upload(contents, filename):
-    global uploaded_df
-    if contents is None:
-        return ""
-    
-    try:
-        # Decode the uploaded file content
-        content_type, content_string = contents.split(',')
-        decoded_string = base64.b64decode(content_string).decode('utf-8')
-        # Read the CSV into a DataFrame
-        uploaded_df = pd.read_csv(io.StringIO(decoded_string))
-        
-        # Return success message
-        return f'File "{filename}" read successfully!'
+app.layout = html.Div([
+    dcc.Location(id='url', refresh=False),
+    render_header(),
+    html.Div(id='nav-tabs'),
+    dcc.Store(id='uploaded-data-store'),
+    html.Div(id='page-content'),
+    render_footer()
+])
 
-    except Exception as e:
-        return f"Error processing file: {str(e)}"
-
-def render_dashboard():
-    global uploaded_df
-    if uploaded_df is None or uploaded_df.empty:
-        return html.Div(className='container', children=[
-            html.H2("No data available"),
-            html.P("Please upload a CSV file first.")
-        ])
-    
-    # Display the column names
-    column_list = uploaded_df.columns.tolist()
-    return html.Div(className='container', children=[
-        html.H2("Dashboard"),
-        html.H4("Uploaded CSV Column Names:"),
-        html.Ul([html.Li(col) for col in column_list])
-    ])
-
-
-
+register_callbacks(app)
 
 if __name__ == '__main__':
     app.run_server(debug=True, host='0.0.0.0', port=8050)
