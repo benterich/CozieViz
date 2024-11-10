@@ -3,6 +3,7 @@ test.csv
 
 # Ignore the following folders:
 envCozieViz
+data
 
 # Ignore the following file types:
 **.pyc

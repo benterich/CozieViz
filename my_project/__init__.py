@@ -1,11 +1,4 @@
-from flask import Flask
+from my_project.routes import register_callbacks
 
-def create_app():
-    app = Flask(__name__)
-    app.config['UPLOAD_FOLDER'] = 'data/uploads'
-    app.secret_key = 'your_secret_key'
-
-    from .routes import main
-    app.register_blueprint(main)
-    
-    return app
+def init_app(app):
+    register_callbacks(app)
